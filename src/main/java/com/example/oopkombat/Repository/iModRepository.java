@@ -1,9 +1,9 @@
 package com.example.oopkombat.Repository;
 
 import com.example.oopkombat.Mode;
+import com.example.oopkombat.Model.ModeModel;
 
-import java.util.UUID;
 
 public interface iModRepository {
-    UUID selectMod(Mode Mode);
+    ModeModel selectMod(Mode Mode);
 }

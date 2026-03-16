@@ -1,6 +1,5 @@
-package com.example.oopkombat.Model;
+package com.example.oopkombat.DTO;
 
-import com.example.oopkombat.Mode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ModeModel {
+public class CreteUpdateMinionInfo {
     private UUID gameID;
-    private Mode modeEnum;
+    private UUID minionID;
+    private String minionName;
+    private long defenseFactor;
 }

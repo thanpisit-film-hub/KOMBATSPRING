@@ -1,6 +1,5 @@
-package com.example.oopkombat.Model;
+package com.example.oopkombat.DTO;
 
-import com.example.oopkombat.Mode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,9 +9,9 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
-public class ModeModel {
+@Getter
+public class CreateNumberOfMinion {
+    private int numberOfMinion;
     private UUID gameID;
-    private Mode modeEnum;
 }
