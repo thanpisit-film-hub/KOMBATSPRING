@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 public class CreteUpdateMinionInfo {
     private UUID gameID;
-    private UUID minionID;
+    private UUID minionTypeID;
     private String minionName;
     private long defenseFactor;
 }

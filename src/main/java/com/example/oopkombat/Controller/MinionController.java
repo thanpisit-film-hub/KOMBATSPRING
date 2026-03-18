@@ -1,5 +1,6 @@
 package com.example.oopkombat.Controller;
 
+import com.example.oopkombat.DTO.CreateMinionRespond;
 import com.example.oopkombat.DTO.CreateNumberOfMinion;
 import com.example.oopkombat.DTO.CreteUpdateMinionInfo;
 import com.example.oopkombat.Model.MinionModel;
@@ -22,15 +23,15 @@ public class MinionController {
         return minionRepository.minionNumberManager(NumberOfMinion.getGameID(), NumberOfMinion.getNumberOfMinion());
     }
 
-    @GetMapping("/find-minion/{gameId}/{minionId}")
-    public MinionModel findMinion(@PathVariable UUID gameId,
-                                  @PathVariable UUID minionId) {
-        return minionRepository.getMinionByUUID(minionId, gameId);
+    @GetMapping("/find-minion-type/{gameId}/{minionTypeId}")
+    public MinionModel findMinionType(@PathVariable UUID gameId,
+                                  @PathVariable UUID minionTypeId) {
+        return minionRepository.getMinionByUUID(minionTypeId, gameId);
     }
 
     @PutMapping("/info")
     public MinionModel updateMinionInfo(@RequestBody CreteUpdateMinionInfo UpdateMinionInfo) {
-        return minionRepository.updateMinionInfo(UpdateMinionInfo.getGameID(), UpdateMinionInfo.getMinionID(), UpdateMinionInfo.getMinionName(), UpdateMinionInfo.getDefenseFactor());
+        return minionRepository.updateMinionInfo(UpdateMinionInfo.getGameID(), UpdateMinionInfo.getMinionTypeID(), UpdateMinionInfo.getMinionName(), UpdateMinionInfo.getDefenseFactor());
     }
 
     @PostMapping("/strategy/{gameId}/{minionId}")
@@ -38,5 +39,11 @@ public class MinionController {
                                       @PathVariable UUID minionId,
                                       @RequestPart("File") MultipartFile file){
         return minionRepository.uploadStrategy(gameId, minionId, file);
+    }
+
+    @GetMapping("/find-minion/{gameId}/{minionId}")
+    public CreateMinionRespond findMinion(@PathVariable UUID gameId,
+                                          @PathVariable UUID minionId) {
+        return minionRepository.getMinionInBoradByUUID(gameId, minionId);
     }
 }

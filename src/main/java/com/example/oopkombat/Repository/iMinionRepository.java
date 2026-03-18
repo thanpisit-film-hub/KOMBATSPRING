@@ -1,5 +1,6 @@
 package com.example.oopkombat.Repository;
 
+import com.example.oopkombat.DTO.CreateMinionRespond;
 import com.example.oopkombat.Model.MinionModel;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,4 +13,5 @@ public interface iMinionRepository {
     MinionModel getMinionByUUID(UUID minionUUID, UUID gameID);
     MinionModel updateMinionInfo(UUID gameID, UUID minionID, String minionName, long defenseFactor);
     boolean uploadStrategy(UUID gameID, UUID minionID, @RequestPart("File") MultipartFile file);
+    CreateMinionRespond getMinionInBoradByUUID(UUID minionUUID, UUID gameID);
 }

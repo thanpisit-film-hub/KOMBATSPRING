@@ -1,7 +1,9 @@
 package com.example.oopkombat.Repository;
 
+import com.example.oopkombat.DTO.CreateMinionRespond;
 import com.example.oopkombat.GameManager.GameManager;
 import com.example.oopkombat.GameState.GameState;
+import com.example.oopkombat.Minion.Minion;
 import com.example.oopkombat.Model.MinionModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -37,9 +39,9 @@ public class MinionRepository implements iMinionRepository {
 
         for(int i = 0; i < minionNumber; i++) {
             MinionModel minion = new MinionModel();
-            minion.setMinionID(UUID.randomUUID());
+            minion.setMinionTypeID(UUID.randomUUID());
 
-            UUID minionuuid = minion.getMinionID();
+            UUID minionuuid = minion.getMinionTypeID();
 
             uuidList.add(minionuuid);
             gameState.getMinions().put(minionuuid, minion);
@@ -89,6 +91,21 @@ public class MinionRepository implements iMinionRepository {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public CreateMinionRespond getMinionInBoradByUUID(UUID minionUUID, UUID gameID) {
+        GameState gameState = gameManager.getGame(gameID);
+        if(gameState == null) return null;
+
+        CreateMinionRespond createMinionRespond = new CreateMinionRespond();
+        Minion minion = gameState.getMinionsInboard().get(minionUUID);
+
+        createMinionRespond.setMinionId(minion.getMinionId());
+        createMinionRespond.setMinionTypeId(minion.getModel().getMinionTypeID());
+        createMinionRespond.setPlayerId(minion.getOwner().getPlayerId());
+
+        return createMinionRespond;
     }
 
 }

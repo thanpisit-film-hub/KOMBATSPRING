@@ -14,7 +14,7 @@ import java.util.UUID;
 @Setter
 public class MinionModel {
     // private UUID minionIDInHex; // real minion
-    private UUID minionID; // type
+    private UUID minionTypeID; // type
     private long defenseFactor;
     private String minionName;
     private Path minionStrategyPath;
