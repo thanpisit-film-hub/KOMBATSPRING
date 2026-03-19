@@ -8,6 +8,7 @@ import com.example.oopkombat.GameState.GameState;
 import com.example.oopkombat.Hex.Hex;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import java.util.UUID;
 @Repository
 public class RunGameRepository {
     private final GameManager gameManager;
+    private final SimpMessagingTemplate simpMessagingTemplate;
+    private final InfoRepository infoRepository;
 
     // buy hex
     public List<CreateHexRespond> buyHex(UUID gameId, UUID playerId, int row, int col) {
@@ -81,19 +84,28 @@ public class RunGameRepository {
     }
 
     // end turn execute
-    public List<CreateHexRespond> endTurn(UUID  gameId, UUID playerId) {
+    public boolean endTurn(UUID  gameId, UUID playerId) {
         List<CreateHexRespond> list = new ArrayList<>();
         GameState gameState = gameManager.getGame(gameId);
-        if (gameState == null) return null;
+        if (gameState == null) return false;
 
         //
 
-        // method(end-turn here) must update All hex before while-loop
+        // method(end-turn here)
+        // นำค่าในนี้ไปใช้ได้เลย
 
         //
 
-        Iterator<Hex> avh = gameState.getAllHexInfo().iterator();
-        while (avh.hasNext()) {
+        return true;
+    }
+
+    // Function อัปเดค Hex ตอนรัน Execute (เรียกทุกครั้ง)
+    public boolean printAllHex(UUID gameId) {
+        List<CreateHexRespond> list = new ArrayList<>();
+        GameState gameState = gameManager.getGame(gameId);
+        if (gameState == null) return false;
+        Iterator<Hex> avh =  gameState.getAllHexInfo().iterator();
+        while(avh.hasNext()){
             CreateHexRespond createHexRespond = new CreateHexRespond();
             Hex hex = avh.next();
 
@@ -107,7 +119,7 @@ public class RunGameRepository {
             }
             list.add(createHexRespond);
         }
-        return list;
+        simpMessagingTemplate.convertAndSend("topic/all-hex", infoRepository.getAllHexInfo(gameId));
+        return true;
     }
-
 }
