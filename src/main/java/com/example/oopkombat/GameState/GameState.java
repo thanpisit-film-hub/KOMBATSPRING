@@ -24,6 +24,8 @@ public class GameState {
 
     private final List<Hex> allHexInfo = new ArrayList<>();
 
+    private final List<Hex> availableHex = new ArrayList<>();
+
     private final Map<UUID, MinionModel> minions = new ConcurrentHashMap<>();
 
     private final Map<UUID, Minion> minionsInboard =  new ConcurrentHashMap<>();

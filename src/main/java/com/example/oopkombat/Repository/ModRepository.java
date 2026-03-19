@@ -14,6 +14,7 @@ import java.util.UUID;
 public class ModRepository implements iModRepository {
     private final GameManager gameManager;
 
+    // เลือก Mode
     @Override
     public ModeModel selectMod(Mode mode) {
         if (mode == null) return null;

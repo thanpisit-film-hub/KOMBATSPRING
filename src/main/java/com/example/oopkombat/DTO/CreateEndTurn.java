@@ -1,0 +1,18 @@
+package com.example.oopkombat.DTO;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.UUID;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+public class CreateEndTurn {
+    private UUID gameId;
+    private UUID playerId;
+    private boolean endTurn;
+}

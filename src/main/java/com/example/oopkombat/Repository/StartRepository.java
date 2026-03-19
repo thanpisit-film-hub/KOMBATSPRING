@@ -14,6 +14,7 @@ import java.util.UUID;
 public class StartRepository {
     private final GameManager gameManager;
 
+    //สร้าง Player ID เมื่อกดปุ่ม Start
     public CreateStartResponse newPlayers(UUID gameID){
         GameState gameState = gameManager.getGame(gameID);
         if(gameState == null) return null;

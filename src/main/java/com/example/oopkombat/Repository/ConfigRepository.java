@@ -15,6 +15,7 @@ public class ConfigRepository {
     private final GameConfigManager gameConfigManager;
     private final GameManager gameManager;
 
+    //สร้าง config เก็บไว้ใน game state (GameId require)
     public UUID setUpGameConfig(UUID gameID,
                                            long startingGold,
                                            long maxGold,
@@ -49,6 +50,7 @@ public class ConfigRepository {
         return gameConfigUUID;
     }
 
+    //ใช้หา game config
     public GameConfigModel getGameConfig(UUID gameId, UUID gameConfigId) {
         GameState gs = gameManager.getGame(gameId);
 

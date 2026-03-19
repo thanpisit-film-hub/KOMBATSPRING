@@ -4,7 +4,6 @@ import com.example.oopkombat.DTO.CreateBudgetPlayer;
 import com.example.oopkombat.DTO.CreateCurrentTurn;
 import com.example.oopkombat.DTO.CreateHexRespond;
 import com.example.oopkombat.DTO.CreateMinionRespond;
-import com.example.oopkombat.Hex.Hex;
 import com.example.oopkombat.Repository.InfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,7 @@ public class CoreInfoController {
     }
 
     @GetMapping("/all-hex/{gameId}")
-    public List<Hex> getHexes(@PathVariable UUID gameId) {
+    public List<CreateHexRespond> getHexes(@PathVariable UUID gameId) {
         return infoRepository.getAllHexInfo(gameId);
     }
 
@@ -44,5 +43,10 @@ public class CoreInfoController {
     @GetMapping("/budget/{gameId}/{playerId}")
     public CreateBudgetPlayer getBudgetPlayer(@PathVariable UUID gameId, @PathVariable UUID playerId) {
         return infoRepository.getBudgetPlayer(gameId, playerId);
+    }
+
+    @GetMapping("/available-hex")
+    public List<CreateHexRespond> getAvailableHexes(@PathVariable UUID gameId) {
+        return infoRepository.gerAvailableHex(gameId);
     }
 }

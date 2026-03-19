@@ -22,7 +22,7 @@ public class MinionModel {
 
 // BuyHex ส่ง position(1, 1 - 8, 8), player -> Web socket
 // BuyMinion ส่ง minion type(UUID), player, position -> Web socket
-// Budget, Available -> Web Socket
+// Budget, Available -> Web Socket, Rest API
 // End turn -> list<Hex>
 // Buy Able -> list<Hex> (buy able)
 // Current Turn -> Web Socket

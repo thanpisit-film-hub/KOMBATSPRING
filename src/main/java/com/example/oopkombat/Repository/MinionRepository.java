@@ -24,6 +24,7 @@ public class MinionRepository implements iMinionRepository {
     private final GameManager gameManager;
     private static final Path strategy_Path = Paths.get("./StrategyStorage");
 
+    //สร้าง UUID ของ minion Type
     @Override
     public List<UUID> minionNumberManager(UUID gameID,int minionNumber) {
         if(gameID == null){
@@ -49,6 +50,7 @@ public class MinionRepository implements iMinionRepository {
         return uuidList;
     }
 
+    //หา minion Type
     @Override
     public MinionModel getMinionByUUID(UUID minionUUID, UUID gameID) {
         GameState gameState = gameManager.getGame(gameID);
@@ -56,6 +58,7 @@ public class MinionRepository implements iMinionRepository {
         return gameState.getMinions().get(minionUUID);
     }
 
+    // update minion Type
     @Override
     public MinionModel updateMinionInfo(UUID gameID, UUID minionID, String minionName, long defenseFactor) {
         GameState gameState = gameManager.getGame(gameID);
@@ -69,6 +72,7 @@ public class MinionRepository implements iMinionRepository {
         return minion;
     }
 
+    // อัปไฟล์จาก client เก็บไว้ใน StrategyStorage พร้อมผูกเก็บไว้ใน minion Type
     @Override
     public boolean uploadStrategy(UUID gameID, UUID minionID, MultipartFile file) {
         if(gameID == null || minionID == null || file == null || file.isEmpty()) return false;
@@ -93,6 +97,7 @@ public class MinionRepository implements iMinionRepository {
         return true;
     }
 
+    // หา minion ใน board
     @Override
     public CreateMinionRespond getMinionInBoradByUUID(UUID minionUUID, UUID gameID) {
         GameState gameState = gameManager.getGame(gameID);

@@ -23,6 +23,7 @@ import java.util.UUID;
 public class InfoRepository {
     private final GameManager gameManager;
 
+    // ดึงเทิร์นปัจจุบัน
     public CreateCurrentTurn getCurrentTurn(UUID gameId) {
         GameState gameState = gameManager.getGame(gameId);
         if(gameState == null) return null;
@@ -33,12 +34,27 @@ public class InfoRepository {
         return createCurrentTurn;
     }
 
-    public List<Hex> getAllHexInfo(UUID gameId) {
+    //ดึง hex ทั้งหมด
+    public List<CreateHexRespond> getAllHexInfo(UUID gameId) {
+        List<CreateHexRespond> list = new ArrayList<>();
         GameState gameState = gameManager.getGame(gameId);
         if(gameState == null) return List.of();
-        return gameState.getAllHexInfo();
+
+        Iterator<Hex> ahi = gameState.getAllHexInfo().iterator();
+        while(ahi.hasNext()) {
+             CreateHexRespond createHexRespond = new CreateHexRespond();
+             Hex hex = ahi.next();
+             createHexRespond.setCol(hex.getCol());
+             createHexRespond.setRow(hex.getRow());
+             createHexRespond.setMinionId(hex.getMinion().getMinionId());
+             createHexRespond.setPlayerId(hex.getPlayer().getPlayerId());
+             list.add(createHexRespond);
+        }
+
+        return list;
     }
 
+    //ดึง hex ที่ player ครอบครองอยู้
     public List<CreateHexRespond> getOwnHex(UUID gameId, UUID playerId) {
         List<CreateHexRespond> list = new ArrayList<>();
 
@@ -67,6 +83,7 @@ public class InfoRepository {
         return list;
     }
 
+    //ดึงค่าเงินของ player
     public CreateBudgetPlayer getBudgetPlayer(UUID gameId, UUID playerId) {
         GameState gameState = gameManager.getGame(gameId);
         if (gameState == null) return null;
@@ -80,6 +97,7 @@ public class InfoRepository {
         return createBudgetPlayer;
     }
 
+    //ดึง minion ทั้งหมดที่ player ครอบครองอยู่
     public List<CreateMinionRespond> getOwnMinion(UUID gameId, UUID playerId) {
         List<CreateMinionRespond> list = new ArrayList<>();
         GameState gameState = gameManager.getGame(gameId);
@@ -98,6 +116,30 @@ public class InfoRepository {
             list.add(createMinionRespond);
         }
 
+        return list;
+    }
+
+    // ดึง hex ที่สามารถซื้อที่ตอนนี้
+    public List<CreateHexRespond> gerAvailableHex(UUID gameId) {
+        List<CreateHexRespond> list = new ArrayList<>();
+        GameState gameState = gameManager.getGame(gameId);
+        if (gameState == null) return null;
+
+        Iterator<Hex> avh =  gameState.getAvailableHex().iterator();
+        while(avh.hasNext()){
+            CreateHexRespond createHexRespond = new CreateHexRespond();
+            Hex hex = avh.next();
+
+            createHexRespond.setRow(hex.getRow());
+            createHexRespond.setCol(hex.getCol());
+            if (hex.getPlayer() != null) {
+                createHexRespond.setPlayerId(hex.getPlayer().getPlayerId());
+            }
+            if (hex.getMinion() != null) {
+                createHexRespond.setMinionId(hex.getMinion().getMinionId());
+            }
+            list.add(createHexRespond);
+        }
         return list;
     }
 }
