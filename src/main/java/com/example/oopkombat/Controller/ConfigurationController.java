@@ -14,9 +14,10 @@ import java.util.UUID;
 public class ConfigurationController {
     private final ConfigRepository configRepository;
 
+    // /config/setup-config
     @PostMapping("/setup-config")
     public UUID newConfig(@RequestBody CreateConfig createConfig){
-        return configRepository.setUpGameConfig(createConfig.getGameId(),
+        return configRepository.setUpGameConfig(createConfig.getGameID(),
                 createConfig.getStartingGold(),
                 createConfig.getMaxGold(),
                 createConfig.getGoldPerRound(),

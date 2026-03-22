@@ -10,7 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 public class CreateConfig {
-    private UUID gameId;
+    private UUID gameID;
     private long startingGold;
     private long maxGold;
     private long goldPerRound;

@@ -23,10 +23,10 @@ public class MinionController {
         return minionRepository.minionNumberManager(NumberOfMinion.getGameID(), NumberOfMinion.getNumberOfMinion());
     }
 
-    @GetMapping("/find-minion-type/{gameId}/{minionTypeId}")
-    public MinionModel findMinionType(@PathVariable UUID gameId,
-                                  @PathVariable UUID minionTypeId) {
-        return minionRepository.getMinionByUUID(minionTypeId, gameId);
+    @GetMapping("/find-minion-type/{gameID}/{minionTypeID}")
+    public MinionModel findMinionType(@PathVariable UUID gameID,
+                                  @PathVariable UUID minionTypeID) {
+        return minionRepository.getMinionByUUID(minionTypeID, gameID);
     }
 
     @PostMapping("/info")
@@ -34,16 +34,16 @@ public class MinionController {
         return minionRepository.updateMinionInfo(UpdateMinionInfo.getGameID(), UpdateMinionInfo.getMinionTypeID(), UpdateMinionInfo.getMinionName(), UpdateMinionInfo.getDefenseFactor());
     }
 
-    @PostMapping("/strategy/{gameId}/{minionId}")
-    public boolean uploadStrategy(@PathVariable UUID gameId,
-                                      @PathVariable UUID minionId,
+    @PostMapping("/strategy/{gameID}/{minionTypeID}")
+    public boolean uploadStrategy(@PathVariable UUID gameID,
+                                      @PathVariable UUID minionTypeID,
                                       @RequestPart("File") MultipartFile file){
-        return minionRepository.uploadStrategy(gameId, minionId, file);
+        return minionRepository.uploadStrategy(gameID, minionTypeID, file);
     }
 
-    @GetMapping("/find-minion/{gameId}/{minionId}")
-    public CreateMinionRespond findMinion(@PathVariable UUID gameId,
-                                          @PathVariable UUID minionId) {
-        return minionRepository.getMinionInBoradByUUID(gameId, minionId);
+    @GetMapping("/find-minion/{gameID}/{minionID}")
+    public CreateMinionRespond findMinion(@PathVariable UUID gameID,
+                                          @PathVariable UUID minionID) {
+        return minionRepository.getMinionInBoradByUUID(gameID, minionID);
     }
 }
