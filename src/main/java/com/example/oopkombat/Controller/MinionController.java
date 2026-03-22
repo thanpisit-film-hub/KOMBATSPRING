@@ -29,7 +29,7 @@ public class MinionController {
         return minionRepository.getMinionByUUID(minionTypeId, gameId);
     }
 
-    @PutMapping("/info")
+    @PostMapping("/info")
     public MinionModel updateMinionInfo(@RequestBody CreteUpdateMinionInfo UpdateMinionInfo) {
         return minionRepository.updateMinionInfo(UpdateMinionInfo.getGameID(), UpdateMinionInfo.getMinionTypeID(), UpdateMinionInfo.getMinionName(), UpdateMinionInfo.getDefenseFactor());
     }
