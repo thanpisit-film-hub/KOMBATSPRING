@@ -35,7 +35,7 @@ public class WebsocketController {
     @MessageMapping("/end-turn")
     public void endTurn(@Payload CreateEndTurn createEndTurn) {
         if(createEndTurn.isEndTurn()){
-            simpMessagingTemplate.convertAndSend("topic/all-hex", runGameRepository.endTurn(createEndTurn.getGameId(), createEndTurn.getPlayerId()));
+            runGameRepository.endTurn(createEndTurn.getGameId(), createEndTurn.getPlayerId());
             simpMessagingTemplate.convertAndSend("/topic/current-turn", infoRepository.getCurrentTurn(createEndTurn.getGameId()));
         }
     }
